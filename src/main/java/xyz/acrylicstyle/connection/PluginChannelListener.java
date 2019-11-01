@@ -24,7 +24,7 @@ public class PluginChannelListener implements PluginMessageListener {
             String input = in.readUTF(); // message
             String[] p = subchannel.split(",");
             if (tag.equalsIgnoreCase("helper:message")) {
-                if (p[1].startsWith("/p")) {
+                if (p.length >= 1 && p[1].startsWith("/p")) {
                     TextComponent dialog = new TextComponent("" + ChatColor.GREEN + ChatColor.BOLD + "[ACCEPT]");
                     dialog.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + "Accept the party invite and join to their party.").create()));
                     dialog.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/p accept " + p[2]));
@@ -34,7 +34,7 @@ public class PluginChannelListener implements PluginMessageListener {
                     dialog.addExtra("" + ChatColor.RESET + ChatColor.GRAY + " - ");
                     dialog.addExtra(deny);
                     Objects.requireNonNull(Bukkit.getPlayer(p[0])).spigot().sendMessage(dialog);
-                } else if (p[1].startsWith("/f")) {
+                } else if (p.length >= 1 && p[1].startsWith("/f")) {
                     TextComponent dialog = new TextComponent("" + ChatColor.GREEN + ChatColor.BOLD + "[ACCEPT]");
                     dialog.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + "Accept the friend request and add to your/their friend list.").create()));
                     dialog.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/f accept " + p[2]));
