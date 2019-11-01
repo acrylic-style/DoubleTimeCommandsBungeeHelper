@@ -1,0 +1,4 @@
+name: DoubleTimeCommandsBungeeHelper
+main: xyz.acrylicstyle.DoubleTimeCommandsHelper
+version: 0.0.1
+depend: [TomeitoLib]
