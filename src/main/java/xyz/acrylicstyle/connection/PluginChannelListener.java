@@ -8,15 +8,14 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import xyz.acrylicstyle.DoubleTimeCommandsHelper;
+import xyz.acrylicstyle.tomeito_core.TomeitoLib;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Objects;
 import java.util.UUID;
 
 public class PluginChannelListener implements PluginMessageListener {
-
     @Override
     public synchronized void onPluginMessageReceived(String tag, Player player, byte[] message) {
         try {
@@ -48,7 +47,21 @@ public class PluginChannelListener implements PluginMessageListener {
                 } else Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).sendMessage(input);
             } else if (tag.equalsIgnoreCase("helper:kick")) {
                 Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).kickPlayer(input);
+            } else if (tag.equalsIgnoreCase("helper:connect")) {
+                sendToBungeeCord(player, subchannel, input, tag);
             }
         } catch (IOException ignored) {}
+    }
+
+    private void sendToBungeeCord(org.bukkit.entity.Player p, String subchannel, String message, String tag) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+        try {
+            out.writeUTF(subchannel);
+            out.writeUTF(message);
+        } catch (IOException e) { // impossible?
+            e.printStackTrace();
+        }
+        p.sendPluginMessage(DoubleTimeCommandsHelper.getPlugin(DoubleTimeCommandsHelper.class), tag, b.toByteArray());
     }
 }
