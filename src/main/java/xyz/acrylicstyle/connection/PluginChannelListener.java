@@ -13,6 +13,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 public class PluginChannelListener implements PluginMessageListener {
 
@@ -33,7 +34,7 @@ public class PluginChannelListener implements PluginMessageListener {
                     deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/p deny " + p[2]));
                     dialog.addExtra("" + ChatColor.RESET + ChatColor.GRAY + " - ");
                     dialog.addExtra(deny);
-                    Objects.requireNonNull(Bukkit.getPlayer(p[0])).spigot().sendMessage(dialog);
+                    Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).spigot().sendMessage(dialog);
                 } else if (p.length >= 2 && p[1].startsWith("/f")) {
                     TextComponent dialog = new TextComponent("" + ChatColor.GREEN + ChatColor.BOLD + "[ACCEPT]");
                     dialog.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + "Accept the friend request and add to your/their friend list.").create()));
@@ -43,10 +44,10 @@ public class PluginChannelListener implements PluginMessageListener {
                     deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/f deny " + p[2]));
                     dialog.addExtra("" + ChatColor.RESET + ChatColor.GRAY + " - ");
                     dialog.addExtra(deny);
-                    Objects.requireNonNull(Bukkit.getPlayer(p[0])).spigot().sendMessage(dialog);
-                } else Objects.requireNonNull(Bukkit.getPlayer(p[0])).sendMessage(input);
+                    Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).spigot().sendMessage(dialog);
+                } else Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).sendMessage(input);
             } else if (tag.equalsIgnoreCase("helper:kick")) {
-                Objects.requireNonNull(Bukkit.getPlayer(p[0])).kickPlayer(input);
+                Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).kickPlayer(input);
             }
         } catch (IOException ignored) {}
     }
