@@ -52,7 +52,7 @@ public class PluginChannelListener implements PluginMessageListener {
                 sendToBungeeCord(player, subchannel, input, tag);
             } else if (tag.equalsIgnoreCase("helper:sound")) {
                 Player player2 = Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(subchannel)));
-                player2.playSound(player2.getLocation(), Sound.valueOf(input), 1, 2);
+                player2.playSound(player2.getLocation(), Sound.valueOf(input), 1, 1);
             }
         } catch (IOException ignored) {}
     }
