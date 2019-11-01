@@ -13,6 +13,7 @@ public class DoubleTimeCommandsHelper extends JavaPlugin {
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "helper:message", pcl);
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "helper:kick", pcl);
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "helper:connect", pcl);
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "helper:sound", pcl);
         Log.info("DoubleTimeCommandsHelper is ready!");
     }
 }
