@@ -24,6 +24,7 @@ public class PluginChannelListener implements PluginMessageListener {
             String input = in.readUTF(); // message
             String[] p = subchannel.split(",");
             if (tag.equalsIgnoreCase("helper:message")) {
+                Bukkit.getLogger().info("[DoubleTimeCommandsHelper] subchannel: " + subchannel);
                 if (p.length >= 2 && p[1].startsWith("/p")) {
                     TextComponent dialog = new TextComponent("" + ChatColor.GREEN + ChatColor.BOLD + "[ACCEPT]");
                     dialog.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + "Accept the party invite and join to their party.").create()));
@@ -44,7 +45,7 @@ public class PluginChannelListener implements PluginMessageListener {
                     dialog.addExtra("" + ChatColor.RESET + ChatColor.GRAY + " - ");
                     dialog.addExtra(deny);
                     Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).spigot().sendMessage(dialog);
-                } else Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p.length <= 1 ? subchannel : p[0]))).sendMessage(input);
+                } else Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).sendMessage(input);
             } else if (tag.equalsIgnoreCase("helper:kick")) {
                 Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).kickPlayer(input);
             } else if (tag.equalsIgnoreCase("helper:connect")) {
