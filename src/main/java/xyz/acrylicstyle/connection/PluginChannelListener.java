@@ -45,7 +45,7 @@ public class PluginChannelListener implements PluginMessageListener {
                     dialog.addExtra("" + ChatColor.RESET + ChatColor.GRAY + " - ");
                     dialog.addExtra(deny);
                     Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).spigot().sendMessage(dialog);
-                } else Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).sendMessage(input);
+                } else Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p.length <= 1 ? subchannel : p[0]))).sendMessage(input);
             } else if (tag.equalsIgnoreCase("helper:kick")) {
                 Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(p[0]))).kickPlayer(input);
             } else if (tag.equalsIgnoreCase("helper:connect")) {
