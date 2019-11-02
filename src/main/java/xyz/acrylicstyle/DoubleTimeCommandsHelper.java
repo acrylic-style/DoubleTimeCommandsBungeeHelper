@@ -3,7 +3,6 @@ package xyz.acrylicstyle;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.acrylicstyle.connection.PluginChannelListener;
-import xyz.acrylicstyle.tomeito_core.utils.Log;
 
 @SuppressWarnings("unused") // its completely using!!!!!
 public class DoubleTimeCommandsHelper extends JavaPlugin {
@@ -15,6 +14,5 @@ public class DoubleTimeCommandsHelper extends JavaPlugin {
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "helper:connect", pcl);
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "helper:connect");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "helper:sound", pcl);
-        Log.info("DoubleTimeCommandsHelper is ready!");
     }
 }
