@@ -1,4 +1,5 @@
 name: DoubleTimeCommandsBungeeHelper
 main: xyz.acrylicstyle.DoubleTimeCommandsHelper
 load: POSTWORLD
+api-version: "1.15"
 version: 0.0.1

@@ -55,21 +55,6 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20180813</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.15.2-R0.1-SNAPSHOT</version>
@@ -91,6 +76,7 @@
             <groupId>xyz.acrylicstyle</groupId>
             <artifactId>Util</artifactId>
             <version>0.10.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
