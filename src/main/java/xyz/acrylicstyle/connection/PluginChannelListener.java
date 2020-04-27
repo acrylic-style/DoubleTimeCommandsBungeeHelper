@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import org.jetbrains.annotations.NotNull;
 import xyz.acrylicstyle.DoubleTimeCommandsHelper;
 
 import java.io.*;
@@ -17,7 +18,7 @@ import java.util.UUID;
 
 public class PluginChannelListener implements PluginMessageListener {
     @Override
-    public synchronized void onPluginMessageReceived(String tag, Player player, byte[] message) {
+    public synchronized void onPluginMessageReceived(String tag, @NotNull Player player, byte[] message) {
         try {
             DataInputStream in = new DataInputStream(new ByteArrayInputStream(message));
             String subchannel = in.readUTF();
@@ -52,7 +53,15 @@ public class PluginChannelListener implements PluginMessageListener {
                 sendToBungeeCord(player, subchannel, input, tag);
             } else if (tag.equalsIgnoreCase("helper:sound")) {
                 Player player2 = Objects.requireNonNull(Bukkit.getPlayer(UUID.fromString(subchannel)));
-                player2.playSound(player2.getLocation(), Sound.valueOf(input), 1, 1);
+                Sound sound;
+                if (input.equals("BLOCK_NOTE_PLING") || input.equals("NOTE_PLING")) {
+                    sound = DoubleTimeCommandsHelper.BLOCK_NOTE_PLING;
+                } else if (input.equals("ENTITY_EXPERIENCE_ORB_PICKUP") || input.equals("ORB_PICKUP")) {
+                    sound  = DoubleTimeCommandsHelper.ENTITY_EXPERIENCE_ORB_PICKUP;
+                } else {
+                    sound = Sound.valueOf(input);
+                }
+                player2.playSound(player2.getLocation(), sound, 1, 1);
             }
         } catch (IOException ignored) {}
     }
@@ -63,9 +72,9 @@ public class PluginChannelListener implements PluginMessageListener {
         try {
             out.writeUTF(subchannel);
             out.writeUTF(message);
-        } catch (IOException e) { // impossible?
+        } catch (IOException e) { // impossible
             e.printStackTrace();
         }
-        p.sendPluginMessage(DoubleTimeCommandsHelper.getPlugin(DoubleTimeCommandsHelper.class), tag, b.toByteArray());
+        p.sendPluginMessage(DoubleTimeCommandsHelper.instance, tag, b.toByteArray());
     }
 }
